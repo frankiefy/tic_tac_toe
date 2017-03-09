@@ -19,6 +19,7 @@ class Map
   end
 
   def add_to_map(letter, position)
+    raise 'this space is already taken' if @flat_map[position] == 'x' || @flat_map[position] == 'o'
     @flat_map[position] = letter
   end
 
