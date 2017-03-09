@@ -1,3 +1,3 @@
 require './lib/map.rb'
 map = Map.new
-map.map
+map.game_map

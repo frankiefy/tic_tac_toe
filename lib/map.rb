@@ -4,8 +4,7 @@ class Map
 
   def initialize
     @flat_map = [0,1,2,3,4,5,6,7,8]
-    @turns = 0
-    @map = print_map
+    @game_map = print_map
   end
 
 
@@ -17,6 +16,10 @@ class Map
     _____
     #{@flat_map[6]}|#{@flat_map[7]}|#{@flat_map[8]}
     "
+  end
+
+  def add_to_map(letter, position)
+    @flat_map[position] = letter
   end
 
 

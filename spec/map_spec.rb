@@ -8,10 +8,6 @@ describe Map do
       expect(subject.flat_map).to eq([0,1,2,3,4,5,6,7,8])
     end
 
-    it 'initializes with number of X & O on map' do
-      expect(subject.turns).to eq(0)
-    end
-
   end
 
   context 'the map' do
