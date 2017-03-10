@@ -50,6 +50,8 @@ class Map
       end_game("x")
     elsif check_diagonals("o") == 'diagonal match'
       end_game("o")
+    elsif @flat_map.all? {|i| i == 'x' || i == 'o' }
+      end_game("g")
     else
       return
     end
@@ -84,7 +86,13 @@ class Map
   end
 
   def end_game(letter)
-    p "#{letter.upcase} HAS WON THE GAME!"
+    if letter == 'g'
+      p "it's a draw!"
+    else
+      p "#{letter.upcase} HAS WON THE GAME!"
+    end
+    # @flat_map = [" "," "," "," "," "," "," "," "," "]
+    # p 'map has been reset'
   end
 
 
