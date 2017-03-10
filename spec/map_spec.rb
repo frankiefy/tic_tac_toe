@@ -23,8 +23,24 @@ describe Map do
 
     it 'wont add_to_map if space is already taken' do
       subject.add_to_map('x',0)
-      expect { subject.add_to_map('o',0) }.to raise_error('this space is already taken')     
+      expect { subject.add_to_map('o',0) }.to raise_error('this space is already taken')
     end
+
+  end
+
+  context 'winning pattern' do
+
+    it 'can check for winner' do
+      subject.flat_map = ['x','x','x',3,4,5,6,7,8]
+      expect(subject.check_for_winner).to eq('X wins!')
+    end
+
+    it 'can check for winner automatically' do
+      subject.flat_map = ['x','x',2,3,4,5,6,7,8]
+      expect(subject.add_to_map('x',2)).to eq('X wins!')
+    end
+
+
 
   end
 end

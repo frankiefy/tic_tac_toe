@@ -11,10 +11,9 @@ class Game
   def take_turn(player, position)
     fail 'its not your turn' if player == 'x' && @player_x.turn == false
     fail 'its not your turn' if player == 'o' && @player_o.turn == false
-    @game_map.add_to_map(player, position)
     @player_x.switch_turns
     @player_o.switch_turns
-    puts '    done, next player'
+    @game_map.add_to_map(player, position)
   end
 
 

@@ -38,4 +38,12 @@ describe Game do
 
   end
 
+  context 'winning' do
+
+    it 'announces when a player has won' do
+      subject.game_map.flat_map = ['x','x',2,3,4,5,6,7,8]
+      expect(subject.take_turn('x',2)).to eq('X wins!')
+    end
+  end
+
 end
