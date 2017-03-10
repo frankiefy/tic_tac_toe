@@ -3,26 +3,25 @@ class Map
   attr_accessor :flat_map, :turns, :map
 
   def initialize
-    @flat_map = [0,1,2,3,4,5,6,7,8]
+    @flat_map = [" "," "," "," "," "," "," "," "," "]
     @game_map = print_map
-    set_up_map_relations
+    refresh_map
   end
 
-  def set_up_map_relations
-    @top_left = @flat_map[0]
-    @top_middle = @flat_map[1]
-    @top_right = @flat_map[2]
-
-    @row1 = [@top_left, @top_middle, @top_right]
-    # row2 = [@flat_map[3], @flat_map[4], @flat_map[5]]
-    # row3 = [@flat_map[6], @flat_map[7], @flat_map[8]]
-
-    @rows = [@row1]
+  def refresh_map
+    @row1 = [@flat_map[0], @flat_map[1], @flat_map[2]]
+    @row2 = [@flat_map[3], @flat_map[4], @flat_map[5]]
+    @row3 = [@flat_map[6], @flat_map[7], @flat_map[8]]
+    @column1 = [@flat_map[0], @flat_map[3], @flat_map[6]]
+    @column2 = [@flat_map[1], @flat_map[4], @flat_map[7]]
+    @column3 = [@flat_map[2], @flat_map[5], @flat_map[8]]
+    @diagonal1 = [@flat_map[0], @flat_map[4], @flat_map[8]]
+    @diagonal2 = [@flat_map[2], @flat_map[4], @flat_map[6]]
   end
 
 
   def print_map
-    return "
+    puts "
     #{@flat_map[0]}|#{@flat_map[1]}|#{@flat_map[2]}
     _____
     #{@flat_map[3]}|#{@flat_map[4]}|#{@flat_map[5]}
@@ -38,22 +37,54 @@ class Map
   end
 
   def check_for_winner
-    set_up_map_relations
-    if check_rows("x") == true
-      return 'X wins!'
-    elsif check_rows("o") == true
-      puts 'O wins!'
+    refresh_map
+    if check_rows("x") == 'rows match'
+      end_game("x")
+    elsif check_rows("o") == 'rows match'
+      end_game("o")
+    elsif check_columns("x") == 'columns match'
+      end_game("x")
+    elsif check_columns("o") == 'columns match'
+      end_game("o")
+    elsif check_diagonals("x") == 'diagonal match'
+      end_game("x")
+    elsif check_diagonals("o") == 'diagonal match'
+      end_game("o")
     else
-      p 'continue'
+      return
     end
   end
 
   def check_rows(letter)
-    if @rows == ["x","x","x"]
-      p 'rows match'
-    else
-      p 'continue2'
+    if @row1 == [letter,letter,letter]
+      return 'rows match'
+    elsif @row2 == [letter,letter,letter]
+      return 'rows match'
+    elsif @row3 == [letter,letter,letter]
+      return 'rows match'
     end
+  end
+
+  def check_columns(letter)
+    if @column1 == [letter,letter,letter]
+      return 'columns match'
+    elsif @column2 == [letter,letter,letter]
+      return 'columns match'
+    elsif @column3 == [letter,letter,letter]
+      return 'columns match'
+    end
+  end
+
+  def check_diagonals(letter)
+    if @diagonal1 == [letter,letter,letter]
+      return 'diagonal match'
+    elsif @diagonal2 == [letter,letter,letter]
+      return 'diagonal match'
+    end
+  end
+
+  def end_game(letter)
+    p "#{letter.upcase} HAS WON THE GAME!"
   end
 
 

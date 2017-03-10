@@ -14,6 +14,7 @@ class Game
     @player_x.switch_turns
     @player_o.switch_turns
     @game_map.add_to_map(player, position)
+    @game_map.print_map
   end
 
 
